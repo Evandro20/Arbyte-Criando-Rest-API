@@ -1,0 +1,26 @@
+{
+  "name": "arbyte-criando-rest-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Evandro20/Arbyte-Criando-Rest-API.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Evandro Carlos Rocha dos Santos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Evandro20/Arbyte-Criando-Rest-API/issues"
+  },
+  "homepage": "https://github.com/Evandro20/Arbyte-Criando-Rest-API#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
