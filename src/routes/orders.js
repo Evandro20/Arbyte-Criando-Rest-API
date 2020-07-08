@@ -15,8 +15,13 @@ router.get(`${routeName}/:id`, (req, res) => {
 });
 
 router.post(routeName, (req, res) => {
+    const pedido = {
+        id_pedido: req.body.id_pedido,
+        quantidade: req.body.quantidade,
+    }
     res.status(201).json({
         message: 'Vai criar um Pedido',
+        pedidoCriado: pedido,
     })
 })
 
