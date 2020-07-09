@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "npm test",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "migration:create": "knex migrate:make",
+    "migration:up": "knex migrate:latest",
+    "migration:down": "knex migrate:rollback"
   },
   "repository": {
     "type": "git",
@@ -22,8 +25,12 @@
   "homepage": "https://github.com/Evandro20/Arbyte-Criando-Rest-API#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "knex": "^0.21.1",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "pg": "^8.2.2",
+    "sqlite3": "^5.0.0"
   }
 }
