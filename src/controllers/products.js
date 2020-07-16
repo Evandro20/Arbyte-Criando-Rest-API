@@ -1,5 +1,6 @@
 const service = require('../services/products');
 const handlerError = require('./handleError')
+const Product = require('../models/Product')
 
 const getAll = (req, res) => {
     service.getAll()
@@ -15,7 +16,11 @@ const getById = (req, res) => {
 
 const create = async (req, res) => {
     try {
-        const created = await service.create(req.body)
+        const product = new Product(req.body)
+        if (!product.name || !product.price) {
+            throw { status: 400, message: 'Invalid data' }
+        }
+        const created = await service.create(product)
         res.status(201).json(created)
     } catch (error) {
         handlerError(res, error)
