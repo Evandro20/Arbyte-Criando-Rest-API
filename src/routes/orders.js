@@ -1,11 +1,10 @@
 const { Router } = require('express');
 const router = new Router();
+const controller = require('../controllers/orders')
 
 const routeName = '/orders'
 
-router.get(routeName, (req, res) => {
-    res.json([{ message: 'Vai retornar todos os Pedidos' }])
-});
+router.get(routeName, controller.getAll)
 
 router.get(`${routeName}/:id`, (req, res) => {
     res.json({
@@ -14,16 +13,7 @@ router.get(`${routeName}/:id`, (req, res) => {
     });
 });
 
-router.post(routeName, (req, res) => {
-    const pedido = {
-        id_pedido: req.body.id_pedido,
-        quantidade: req.body.quantidade,
-    }
-    res.status(201).json({
-        message: 'Vai criar um Pedido',
-        pedidoCriado: pedido,
-    })
-})
+router.post(routeName, controller.create)
 
 router.patch(`${routeName}/:id`, (req, res) => {
     res.json({
