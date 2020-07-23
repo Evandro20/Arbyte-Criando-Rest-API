@@ -1,5 +1,7 @@
 const repository = require('../repositories/users')
 const User = require('../models/User')
+const { encryptPassword } = require('./utils/encrypt')
+
 
 const create = async (data) => {
     const user = new User({
@@ -9,10 +11,25 @@ const create = async (data) => {
         updated_at: undefined,
     })
 
-    const id = await repository.create({ ...user, password: data.password })
-    return repository.getById(id)
+    const { salt, encryptedPassword: password } = encryptPassword(data.password)
+
+    const id = await repository.create({ ...user, password, salt })
+    const created = await repository.getOne({ id: id })
+    return created.view()
+}
+
+const login = async (loginData) => {
+    const user = await repository.getOne({ email: loginData.email })
+    if (!user) {
+        throw { status: 401, message: 'Not authorized' }
+    }
+    const { encryptedPassword } = encryptPassword(loginData.password, user.salt)
+    if (encryptedPassword !== user.password) {
+        throw { status: 401, message: 'Not authorized' }
+    }
 }
 
 module.exports = {
     create,
+    login,
 }
